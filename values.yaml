@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: custom-controller
+  tag: latest
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  create: true
+  name: "custom-controller"
+  annotations: {}
+
+rbac:
+  create: true
+
+controller:
+  logLevel: info
+  workers: 2
+  resyncPeriod: 30
+  leaderElection:
+    enabled: true
+    leaseDuration: 15
+    renewDeadline: 10
+    retryPeriod: 2
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
